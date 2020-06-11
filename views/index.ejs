@@ -9,7 +9,30 @@
         <%- include sidebar.ejs -%>
         <div class='col-sm-10'>
           <h1><%= title %></h1>
+          <hr>
+          
+          
           <p>Welcome to <%= title %></p>
+          <% if (error) {%>
+            <%- include error.ejs -%>
+          <% } else { %>
+            <p>Inventory Info</p>
+            <ul>
+              <li>Stores: <%= store.length %></li>
+              <ul><% for (var i = 0; i < store.length; i++) { %>
+                <li><%= store[i].location%></li>
+              <% } %>
+              </ul>
+              <li>Categories: <%= category.length %></li>
+              <ul><% for (var j = 0; j < category.length; j++) { %>
+                <li><%= category[j].name%></li>
+              <% } %>
+              </ul>
+              <li>Total Inventory: <%= itemtotal %></li>
+            </ul>
+          <% } %>
+
+
         </div>
       </div>
     </div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include headerinfo.ejs -%>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <%- include sidebar.ejs -%>
+        <div class='col-sm-10'>
+          <h1><%= title %></h1>
+          <hr>
+
+          
+          <% if (!store) {%>
+            <p>NO STORE FOUND</p>
+          <% } else { %>
+            <% for (var i = 0; i < categorized_items.length; i++) { %>
+                <div>
+                    <%= categorized_items[i] %>
+                </div>
+            <% } %>
+          <% } %>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

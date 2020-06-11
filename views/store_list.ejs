@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include headerinfo.ejs -%>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <%- include sidebar.ejs -%>
+        <div class='col-sm-10'>
+          <h1><%= title %></h1>
+          <hr>
+
+          
+          <% if (!store_list) {%>
+            <p>NO STORES FOUND</p>
+          <% } else { %>
+            <% for (var i = 0; i < store_list.length; i++) { %>
+                <div>
+                    <a href='<%=store_list[i].url%>'><%= store_list[i].location %></a>
+                    <ul>
+                        <li>Open: <%= store_list[i].days %></li>
+                        <li>Hours: <%= store_list[i].hours %></li>
+                        <li>Carried Items: <%= store_list[i].items.length %></li>
+                    </ul>
+                </div>
+            <% } %>
+          <% } %>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
