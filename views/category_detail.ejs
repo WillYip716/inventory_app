@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include headerinfo.ejs -%>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <%- include sidebar.ejs -%>
+        <div class='col-sm-10'>
+          <h1><%= title %></h1>
+          <hr>
+          
+          <% if (!locals.category) {%>
+            <p>NO CATEGORY FOUND</p>
+          <% } else { %>
+            <p><%= category.name %></p>
+            <a href='<%=category.url%>/delete'>Delete</a>
+            <br>
+            <a href='<%=category.url%>/update'>Update</a>
+            <br>
+                <% for (var i = 0; i < category_items.length; i++) { %>
+                      <div class='item_box'>
+                        <p><%=category_items[i].name%></p>
+                        <p><%=category_items[i].summary%></p>
+                        <p>Stock: <%=category_items[i].quantity%></p>
+                        <p>Price: $<%=category_items[i].price%></p>
+                      </div>
+                <% } %>
+            <% } %>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include headerinfo.ejs -%>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <%- include sidebar.ejs -%>
+        <div class='col-sm-10'>
+          <h1><%= title %></h1>
+          <hr>
+          
+          <form method='POST' action='' >
+            <div class="form-group">
+                <label for="name">Location:</label>
+                <input type="text" id="name" class="form-control" placeholder="Furniture,etc" name="name" required="true" value="<%= locals.category ?  category.name : '' %>">
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
