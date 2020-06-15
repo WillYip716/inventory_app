@@ -13,6 +13,16 @@
           
           <form method='POST' action='' >
             <div class="form-group">
+              <label for="store">Store:</label>
+              <select 
+                name="store" id="store" class="form-control" type="select" placeholder="Select a store to assign item" required="true"
+              >
+              <% for (var i = 0; i < stores.length; i++) { %>
+                  <option value="<%=stores[i]._id%>"><%=stores[i].location%></option>
+              <% } %>
+              </select>
+            </div>
+            <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" class="form-control" placeholder="Shirt,etc" name="name" required="true" value="<%= locals.item ?  item.name : '' %>">
             </div>
@@ -26,10 +36,10 @@
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" id="price" class="form-control" name="price" required="true" value="<%= locals.item ?  item.price : '' %>">
+                <input type="text" id="price" class="form-control" name="price" required="true" value="<%= locals.item ?  item.price : '' %>">
             </div>
             <div class="form-group">
-                <label for="category">Days Open:</label>
+                <label for="category">Category:</label>
                 <select 
                   name="category" id="category" class="form-control" type="select" placeholder="Select a category" required="true"
                 >

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include headerinfo.ejs -%>
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row'>
+        <%- include sidebar.ejs -%>
+        <div class='col-sm-10'>
+          <h1><%= title %></h1>
+          <hr>
+
+          <p><%= item.name %></p>
+          <p>Category: $<%= item.category.name %></p>
+          <p><%= item.summary %></p>
+          <p>Quantity: <%= item.quantity %></p>
+          <p>Price: $<%= item.price %></p>
+          <p>Store: <a href='<%= store[0].url %>'><%= store[0].location %></a></p>     
+          <p>Do you really want to delete this item?</p>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <input type="hidden" id="storeid" name="storeid" required="true" value="<%= store[0]._id %>" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="itemid" name="itemid" required="true" value="<%= item._id %>" class="form-control">
+                </div>
+                <button class="btn btn-primary" type="submit">Delete</button>
+            </form>
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

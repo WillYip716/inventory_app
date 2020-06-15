@@ -15,11 +15,16 @@
             <p>NO ITEM FOUND</p>
           <% } else { %>
             <p><%= item.name %></p>
+            <p>Category: <%= item.category.name %></p>
             <p><%= item.summary %></p>
             <p>Quantity: <%= item.quantity %></p>
             <p>Price: $<%= item.price %></p>
             <p>Store: <a href='<%= store[0].url %>'><%= store[0].location %></a></p>
             
+            <a href='<%=item.url%>/delete'>Delete</a>
+            <br>
+            <a href='<%=item.url%>/update'>Update</a>
+            <br>
           <% } %>
 
 
