@@ -14,6 +14,8 @@
           <% if (!locals.item) {%>
             <p>NO ITEM FOUND</p>
           <% } else { %>
+            <img src="<%= item.picture == 'holder' ? '/images/default.jpg': item.picture %>" alt="">
+            <br>
             <p><%= item.name %></p>
             <p>Category: <%= item.category.name %></p>
             <p><%= item.summary %></p>

@@ -21,7 +21,9 @@
             <br>
                 <% for (var i = 0; i < category_items.length; i++) { %>
                       <div class='item_box'>
-                        <p><%=category_items[i].name%></p>
+                        <img src="<%= category_items[i].picture == 'holder' ? '/images/default.jpg': category_items[i].picture %>" alt="">
+                        <br>
+                        <a href='<%=category_items[i].url%>'><%=category_items[i].name%></a>
                         <p><%=category_items[i].summary%></p>
                         <p>Stock: <%=category_items[i].quantity%></p>
                         <p>Price: $<%=category_items[i].price%></p>

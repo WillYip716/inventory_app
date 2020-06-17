@@ -9,7 +9,7 @@ var ItemSchema = new Schema(
     quantity: {type: Number, required: true},
     price: {type: Number, required: true},
     category: {type: Schema.Types.ObjectId, ref: 'Category'},
-    picture: {type: String, required: true, default:'holder'}
+    picture: {type: String, required: true, default:''}
   }
 );
 

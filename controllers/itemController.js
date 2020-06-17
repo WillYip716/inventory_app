@@ -4,8 +4,11 @@ var Category = require('../models/category');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 var async = require('async');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+
+
+const fs = require('fs');
+const multer = require('multer');
+const upload = multer({ dest: 'public/images',});
 
 // Display list of all items.
 exports.item_list = function(req, res,next) {
@@ -60,6 +63,8 @@ exports.item_create_get = function(req, res,next) {
 // Handle item create on POST.
 exports.item_create_post = [
 
+    upload.single('picture'),
+
     // Validate fields.
     body('store', 'store must be chose').trim().isLength({ min: 1 }),
     body('name', 'name must be specified').trim().isLength({ min: 1 }),
@@ -86,6 +91,10 @@ exports.item_create_post = [
             price: req.body.price,
             category: req.body.category,
           });
+
+          if (req.file) {
+			item.picture = req.file.path.slice(6);
+		  }
 
         if (!errors.isEmpty()) {
             async.parallel({
@@ -161,8 +170,14 @@ exports.item_delete_post = function(req, res,next) {
         if (err) { return next(err); }
         Store.updateOne( {_id:req.body.storeid}, { $pullAll: {items: [req.body.itemid] } } ).exec(function(err){
             if (err) { return next(err); }
-            Item.findByIdAndRemove(req.body.itemid,function deleteItem(err2){
+
+            Item.findByIdAndRemove(req.body.itemid,function(err2, itemfound){
                 if (err2) { return next(err2); }
+                if(itemfound.picture!="holder"){
+                    fs.unlink('public' + itemfound.picture, function (err) {
+                        if (err) throw err;
+                    });
+                }
                 res.redirect('/catalog/items');
             })
         })
@@ -193,7 +208,7 @@ exports.item_update_get = function(req, res,next) {
 
 // Handle item update on POST.
 exports.item_update_post = [
-
+    upload.single('picture'),
     // Validate fields.
     body('store', 'store must be chose').trim().isLength({ min: 1 }),
     body('name', 'name must be specified').trim().isLength({ min: 1 }),
@@ -221,6 +236,10 @@ exports.item_update_post = [
             category: req.body.category,
             _id:req.params.id 
           });
+        
+          if (req.file) {
+			item.picture = req.file.path.slice(6);
+		  }
 
         if (!errors.isEmpty()) {
             async.parallel({
@@ -240,6 +259,7 @@ exports.item_update_post = [
             // Data from form is valid.
             Item.findByIdAndUpdate(req.params.id,item,{},function (err,theItem) {
                 if (err) { return next(err); }
+                
 
                 Store.find({ 'items': req.params.id }).exec(function(err1,livestore){
                     if (err1) { return next(err1); }
@@ -259,6 +279,7 @@ exports.item_update_post = [
                                 }
                                 //Successful, so render
                                 result.items.push(theItem);
+                                
                                 result.save(function(err4){
                                     if (err4) { return next(err4); }
                                     res.redirect(theItem.url);

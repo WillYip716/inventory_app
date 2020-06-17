@@ -20,6 +20,8 @@
                   <div>
                     <% for (var j = 0; j < stores[i].items.length; j++) { %>
                       <div class='item_box'>
+                        <img src="<%= stores[i].items[j].picture == 'holder' ? '/images/default.jpg': stores[i].items[j].picture %>" alt="">
+                        <br>
                         <a href='<%=stores[i].items[j].url%>'><%=stores[i].items[j].name%></a>
                         <p>Stock: <%=stores[i].items[j].quantity%></p>
                         <p>Price: $<%=stores[i].items[j].price%></p>
