@@ -174,9 +174,11 @@ exports.item_delete_post = function(req, res,next) {
             Item.findByIdAndRemove(req.body.itemid,function(err2, itemfound){
                 if (err2) { return next(err2); }
                 if(itemfound.picture!="holder"){
-                    fs.unlink('public' + itemfound.picture, function (err) {
-                        if (err) throw err;
-                    });
+                    if(fs.existsSync('public' + itemfound.picture)){
+                        fs.unlink('public' + itemfound.picture, function (err) {
+                            if (err) throw err;
+                        });
+                    }
                 }
                 res.redirect('/catalog/items');
             })
