@@ -27,7 +27,7 @@
                       <div class='item_box'>
                         <img src="<%= categorized_items[i][j].picture == 'holder' ? '/images/default.jpg': categorized_items[i][j].picture %>" alt="">
                         <br>
-                        <p><%=categorized_items[i][j].name%></p>
+                        <a href="<%=categorized_items[i][j].url%>"><%=categorized_items[i][j].name%></a>
                         <p><%=categorized_items[i][j].summary%></p>
                         <p>Stock: <%=categorized_items[i][j].quantity%></p>
                         <p>Price: $<%=categorized_items[i][j].price%></p>
